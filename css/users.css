@@ -1,0 +1,212 @@
+
+
+
+
+
+/* =============================================================
+   GENE'S LECHON - USERS PAGE STYLES ONLY
+   Layout/sidebar is handled by layout.css
+   ============================================================= */
+
+:root {
+    --primary: #ff4e00;       
+    --primary-light: #fff0e6;
+    --navy: #1a2b4c;          
+    --text-grey: #8d97ad;
+    --bg-body: #f1f4f9;       
+    --bg-card: #ffffff;
+    --radius: 16px;           
+    --shadow: 0 5px 20px rgba(0,0,0,0.04);
+    --border-color: #eee;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background-color: var(--bg-body); color: var(--navy); min-height: 100vh; overflow-x: hidden; }
+
+/* =========================================
+   HEADER
+   ========================================= */
+header { 
+    display: flex; justify-content: space-between; 
+    align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;
+}
+.header-left h1 { font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+.header-left p { color: var(--text-grey); font-size: 14px; }
+
+.btn-primary {
+    background: var(--primary); color: white; border: none; padding: 12px 25px;
+    border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;
+    transition: 0.3s; box-shadow: 0 5px 15px rgba(255,78,0,0.2);
+}
+.btn-primary:hover { background: #e64a00; transform: translateY(-2px); }
+
+/* =========================================
+   TABLE CARD
+   ========================================= */
+.users-container { max-width: 1200px; margin: 0 auto; }
+.table-card { 
+    background: var(--bg-card); border-radius: 20px; 
+    box-shadow: var(--shadow); padding: 25px; 
+}
+
+.table-header { 
+    display: flex; justify-content: space-between; 
+    align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;
+}
+.table-header h3 { font-size: 18px; color: var(--navy); }
+
+.search-box {
+    display: flex; align-items: center; background: var(--bg-body);
+    padding: 10px 20px; border-radius: 30px; width: 300px; 
+    border: 1px solid transparent; transition: 0.3s;
+}
+.search-box:focus-within { border-color: var(--primary); background: #fff; }
+.search-box i { color: var(--text-grey); margin-right: 10px; }
+.search-box input { 
+    border: none; background: transparent; outline: none; 
+    width: 100%; font-size: 14px; color: var(--navy); 
+}
+
+.table-responsive { overflow-x: auto; }
+.users-table { width: 100%; border-collapse: collapse; }
+.users-table th { 
+    text-align: left; padding: 15px; font-size: 12px; font-weight: 600; 
+    color: var(--text-grey); border-bottom: 1px solid var(--border-color); 
+    text-transform: uppercase; 
+}
+.users-table td { 
+    padding: 15px; font-size: 14px; border-bottom: 1px solid var(--border-color); 
+    vertical-align: middle; 
+}
+.users-table tr:last-child td { border-bottom: none; }
+
+.user-cell { display: flex; align-items: center; gap: 15px; }
+.user-cell img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.user-cell span { font-weight: 600; color: var(--navy); }
+
+.role-badge { 
+    padding: 5px 12px; border-radius: 20px; font-size: 11px; 
+    font-weight: 700; text-transform: uppercase; 
+}
+.role-badge.admin { background: #e3f2fd; color: #2196f3; }
+.role-badge.cashier { background: #fff3e0; color: #ff9800; }
+.role-badge.clerk { background: #e8f5e9; color: #4caf50; }
+
+.status-badge { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }
+.status-active { background: #4caf50; box-shadow: 0 0 0 3px rgba(76,175,80,0.1); }
+.status-disabled { background: #f44336; box-shadow: 0 0 0 3px rgba(244,67,54,0.1); }
+
+.actions { display: flex; gap: 8px; }
+.btn-icon { 
+    width: 32px; height: 32px; border-radius: 8px; border: none; cursor: pointer; 
+    display: flex; align-items: center; justify-content: center; transition: 0.2s; 
+    background: #f8f9fc; color: var(--text-grey); 
+}
+.btn-icon:hover { background: var(--primary); color: white; }
+.btn-icon.delete:hover { background: #ffebee; color: #f44336; }
+
+/* =========================================
+   MODALS
+   ========================================= */
+.modal { 
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; 
+    backdrop-filter: blur(5px); padding: 20px;
+}
+.modal-content { 
+    background: var(--bg-card); padding: 30px; border-radius: 25px; 
+    width: 90%; max-width: 500px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); 
+    animation: slideUp 0.3s ease; 
+}
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.modal-header { 
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; 
+}
+.modal-header h3 { font-size: 20px; color: var(--navy); }
+.close-modal { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-grey); }
+
+/* Form Styles */
+.form-row.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { 
+    display: block; font-size: 12px; font-weight: 600; 
+    color: var(--text-grey); margin-bottom: 8px; 
+}
+.form-group input, .form-group select { 
+    width: 100%; padding: 12px 15px; border: 1px solid var(--border-color); 
+    background: var(--bg-body); border-radius: 12px; outline: none; 
+    font-size: 14px; color: var(--navy); transition: 0.3s; 
+}
+.form-group input:focus, .form-group select:focus { 
+    border-color: var(--primary); background: #fff; 
+}
+
+.input-disabled, input:disabled, select:disabled {
+    background-color: #f0f0f0; color: #999; cursor: not-allowed; border-color: #eee;
+}
+
+.password-input-wrapper { display: flex; gap: 8px; }
+.password-input-wrapper input { flex: 1; font-family: monospace; letter-spacing: 1px; }
+.generate-btn {
+    background: #edf2f7; color: var(--navy); border: none; border-radius: 12px;
+    width: 45px; cursor: pointer; transition: 0.2s; font-size: 14px;
+}
+.generate-btn:hover { background: #e2e8f0; color: var(--primary); }
+
+.modal-footer { 
+    display: flex; gap: 10px; justify-content: flex-end; margin-top: 30px; 
+}
+.btn-outline { 
+    background: transparent; border: 1px solid var(--border-color); 
+    color: var(--text-grey); padding: 12px 25px; border-radius: 12px; 
+    cursor: pointer; font-weight: 600; 
+}
+.btn-outline:hover { background: #f8f9fc; color: var(--navy); }
+
+/* Delete Modal */
+.small-modal { max-width: 400px; }
+.text-center { text-align: center; }
+.icon-circle { 
+    width: 70px; height: 70px; border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    margin: 0 auto 20px; font-size: 28px; 
+}
+.delete-icon { background: #ffebee; color: #f44336; }
+.btn-danger { 
+    background: #f44336; color: white; border: none; 
+    padding: 10px 25px; border-radius: 25px; cursor: pointer; 
+    font-weight: 600; transition: 0.3s; 
+}
+.btn-danger:hover { background: #d32f2f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(244,67,54,0.3); }
+.action-buttons-center { display: flex; justify-content: center; gap: 10px; }
+
+/* =========================================
+   TOAST
+   ========================================= */
+#toast-container { 
+    position: fixed; top: 20px; right: 20px; z-index: 3000; 
+    display: flex; flex-direction: column; gap: 10px; 
+    pointer-events: none; 
+}
+.toast { 
+    pointer-events: auto; background: var(--bg-card); padding: 15px 25px; 
+    border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+    border-left: 5px solid; display: flex; align-items: center; gap: 15px; 
+    min-width: 300px; animation: slideIn 0.3s ease; color: var(--navy); font-weight: 500; 
+}
+.toast.success { border-color: #4caf50; }
+.toast.error { border-color: #f44336; }
+.toast.warning { border-color: #ff9800; }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    header { flex-direction: column; align-items: flex-start; }
+    .table-header { flex-direction: column; align-items: flex-start; }
+    .search-box { width: 100%; }
+    .form-row.two-col { grid-template-columns: 1fr; }
+    .modal-content { width: 95%; padding: 20px; }
+}
