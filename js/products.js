@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 // import { 
 //     db, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy 
 // } from './firebase.js';
@@ -1537,6 +1529,11 @@ window.handleProductSubmit = async function(e) {
         updatedAt: new Date()
     };
 
+    // Save status when editing
+    if (id) {
+        data.status = document.getElementById('prodStatus').value;
+    }
+
     // Gather Ingredients
     const ingredients = [];
     document.querySelectorAll('.recipe-row').forEach(row => {
@@ -1647,6 +1644,10 @@ window.editProduct = function(id) {
         if(prod.image) document.getElementById('imagePreviewFile').innerHTML = `<img src="${prod.image}" style="width:100%; height:100%; object-fit:cover;">`;
     }
 
+    // Set status toggle (show it on edit)
+    document.getElementById('statusToggleGroup').style.display = 'block';
+    window.setProdStatus(prod.status === 'inactive' ? 'inactive' : 'active');
+
     document.getElementById('modalTitle').innerText = "Edit Product";
     document.getElementById('productModal').style.display = 'flex';
 };
@@ -1661,6 +1662,10 @@ window.openProductModal = function() {
     document.getElementById('finalImageSrc').value = "";
     document.getElementById('ingredients-container').innerHTML = '';
     
+    // Hide status toggle for new products (default is active)
+    document.getElementById('statusToggleGroup').style.display = 'none';
+    document.getElementById('prodStatus').value = 'active';
+
     // Reset Image Preview
     window.toggleImageMode('file');
     document.getElementById('imagePreviewFile').innerHTML = `<i class="fas fa-cloud-upload-alt"></i><span>Click to Upload</span>`;
@@ -1719,6 +1724,19 @@ window.previewImageFromUrl = function(url) {
         document.getElementById('finalImageSrc').value = url;
     }
 }
+
+window.setProdStatus = function(status) {
+    document.getElementById('prodStatus').value = status;
+    const activeBtn = document.getElementById('prodStatusActiveBtn');
+    const inactiveBtn = document.getElementById('prodStatusInactiveBtn');
+    if (status === 'active') {
+        activeBtn.classList.add('selected');
+        inactiveBtn.classList.remove('selected');
+    } else {
+        inactiveBtn.classList.add('selected');
+        activeBtn.classList.remove('selected');
+    }
+};
 
 window.closeModal = (id) => document.getElementById(id).style.display = 'none';
 
