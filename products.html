@@ -100,6 +100,19 @@
                         <label>Description</label>
                         <textarea id="prodDesc" class="form-input" rows="2" placeholder="Short description..."></textarea>
                     </div>
+                    <!-- Active / Inactive Toggle (edit only) -->
+                    <div class="form-group" id="statusToggleGroup">
+                        <label>Product Status</label>
+                        <div class="prod-status-wrap">
+                            <button type="button" id="prodStatusActiveBtn" class="prod-status-btn prod-active selected" onclick="window.setProdStatus('active')">
+                                <i class="fas fa-check-circle"></i> Active
+                            </button>
+                            <button type="button" id="prodStatusInactiveBtn" class="prod-status-btn prod-inactive" onclick="window.setProdStatus('inactive')">
+                                <i class="fas fa-ban"></i> Inactive
+                            </button>
+                        </div>
+                        <input type="hidden" id="prodStatus" value="active">
+                    </div>
                 </div>
             </div>
             <div class="inventory-link-section">
