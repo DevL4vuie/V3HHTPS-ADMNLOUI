@@ -1,29 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import { 
 //     db, collection, query, onSnapshot 
 // } from './firebase.js';
@@ -637,11 +611,11 @@ function initCharts() {
         methodChartInstance = new Chart(ctxMethod.getContext('2d'), {
             type: 'doughnut', 
             data: { 
-                labels: ['Cash', 'GCash', 'Bank'], 
+                labels: ['Cash', 'GCash', 'NFC'], 
                 datasets: [{ 
                     data: [0, 0, 0], 
-                    backgroundColor: ['#ed9119', '#1cc88a', '#36b9cc'],
-                    hoverOffset: 25, // <--- MAKES IT POP
+                    backgroundColor: ['#ed9119', '#1cc88a', '#667eea'],
+                    hoverOffset: 25,
                     borderWidth: 2,
                     borderColor: '#ffffff'
                 }] 
@@ -665,14 +639,14 @@ function initCharts() {
 
 function updateCharts(data) {
     if(!volumeChartInstance || !methodChartInstance) return;
-    let cash = 0, gcash = 0, bank = 0;
+    let cash = 0, gcash = 0, nfc = 0;
     data.forEach(t => {
         const m = (t.method || t.paymentMethod || '').toLowerCase();
         if(m.includes('gcash')) gcash++;
-        else if(m.includes('bank')) bank++;
+        else if(m.includes('nfc')) nfc++;
         else cash++;
     });
-    methodChartInstance.data.datasets[0].data = [cash, gcash, bank];
+    methodChartInstance.data.datasets[0].data = [cash, gcash, nfc];
     methodChartInstance.update();
 
     const chartData = [...data].reverse().slice(-10);
